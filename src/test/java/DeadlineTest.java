@@ -17,5 +17,8 @@ public class DeadlineTest {
 
         Deadline taskDeadlineDefault =new TaskDeadline("Get Client website approval", "Siddhart", null, new Date(new Date().getTime() + 86400000 * 30));
         System.out.println(taskDeadlineDefault.getDeadlineString());
+
+
+        new Notifyer("Siddhart", taskDeadlineRed, taskDeadlineRed.getType());
     }
 }

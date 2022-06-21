@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Login {
+    //Singleton Pattern
+
     public static Login singleton;
     private ArrayList<User> users;
     private User user;
