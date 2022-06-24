@@ -1,5 +1,3 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TaskDeadline extends Deadline {
@@ -25,7 +23,6 @@ public class TaskDeadline extends Deadline {
             //green
             return String.format("\u001B[32m%d days - %s - %s\u001B[0m", days, getName(), getAssigned());
         }
-
 
         //white
         return String.format("%d days - %s - %s", days, getName(), getAssigned());

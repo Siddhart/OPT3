@@ -1,7 +1,4 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 public abstract class Deadline {
     //Template Method Pattern
@@ -10,6 +7,8 @@ public abstract class Deadline {
     protected String username;
     protected String teamName;
     protected Date deadline;
+
+    protected String type;
 
     public int getDaysleft(){
         long ms1 = new Date().getTime();
@@ -27,11 +26,12 @@ public abstract class Deadline {
         return (int) (timeDiff / (1000 * 60 * 60 * 24));
     }
 
+
     public String getDeadlineUser(){
         return this.username;
     }
 
-    public String getDeadlineTeam(){
+    public String getTeamName(){
         return this.teamName;
     }
 

@@ -25,19 +25,19 @@ public class Notifyer {
         return "16777215";
     }
 
-    private String generateMessage(Deadline d, String type){
+    private String generateMessage(Deadline d, String type, String username) {
         String returnString = "";
-        String title = String.format("You have **%d** day(s) left to **%s**", d.getDaysleft(), d.getName());
+        String title = String.format("@%s - You have **%d** day(s) left to **%s**", username, d.getDaysleft(), d.getName());
 
         returnString += "{\"embeds\": [{"
                 + "\"title\": \"" + title + "\","
-                + "\"color\": " + getColor(d.getDaysleft(),type)
+                + "\"color\": " + getColor(d.getDaysleft(), type)
                 + "}]}";
 
         return returnString;
     }
 
-    public Notifyer(String user, Deadline d, String type) {
+    public Notifyer(String username, Deadline d, String type) {
         // CONFIG
         String tokenWebhook = "https://discord.com/api/webhooks/988899255307628584/WldSWO_FFDeZ02MsO3mV_oKhmzd2YGTMVOU_AaCL6eVgjMzEtysWtbwF_KZPEiJMzM65";
 
@@ -53,7 +53,7 @@ public class Notifyer {
 
             OutputStream stream = con.getOutputStream();
 
-            stream.write(generateMessage(d, type).getBytes());
+            stream.write(generateMessage(d, type, username).getBytes());
             stream.flush();
             stream.close();
 

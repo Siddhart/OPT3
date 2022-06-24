@@ -3,6 +3,7 @@ public class Employee {
 
     private String name;
     private boolean manager;
+    private String teamName;
 
     public Employee(String tag, boolean manager) {
 

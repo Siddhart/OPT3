@@ -1,25 +1,76 @@
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 public class Company {
-    public static ArrayList<User> users = new ArrayList<>(){
+    public static ArrayList<User> users = new ArrayList<>() {
         {
             add(new User("Siddhart", "1234"));
-            add(new User("Admin", "admin"));
+            add(new User("Dev1", "1234"));
+            add(new User("DevAdmin", "admin"));
         }
     };
 
-    public static ArrayList<Deadline> deadlines = new ArrayList<>(){
+    public static ArrayList<Team> teams = new ArrayList<>() {
         {
-            add(new TaskDeadline("Siddhart", null, "Get design approval", new Date(1654543552000L)));
-            add(new TaskDeadline("Siddhart", null, "Convert Figma design to HTML and CSS", new Date(1656703552000L)));
-
-
-            add(new FinalDeadline("Siddhart", null, "Setup website hosting", new Date(1657481152000L)));
+            add(new Team("Development", "DevAdmin", (new String[]{"Siddhart", "Dev1"})));
         }
     };
 
-    public static ArrayList<User> getUsers(){
+    public static ArrayList<Deadline> deadlines = new ArrayList<>() {
+        {
+            //without team
+            add(new TaskDeadline("Get design approval", "Siddhart", null, new Date(1654543552000L)));
+            add(new TaskDeadline("Convert Figma design to HTML and CSS", "Siddhart", null, new Date(1656703552000L)));
+            //with team
+            add(new TaskDeadline("Setup website hosting 1/2", null, "Development", new Date(1657481152000L)));
+
+            //final deadline ONLY TEAM
+            add(new FinalDeadline("Setup website hosting 2/2", "Siddhart", null, new Date(1654543552000L)));
+        }
+    };
+
+    public static ArrayList<User> getUsers() {
         return users;
+    }
+
+    public static Team getTeam(String teamName) {
+        for (Team team : teams) {
+            if (team.getTeamName().equals(teamName)) {
+                return team;
+            }
+        }
+
+        return null;
+    }
+
+    public static ArrayList<Deadline> getUserDeadline(Employee employee) {
+        ArrayList<Deadline> returnList = new ArrayList<>();
+
+        //add individual deadlines
+        for (Deadline deadline : deadlines) {
+
+            //return individual deadlines
+            if (employee.getName().equals(deadline.getDeadlineUser())) {
+                returnList.add(deadline);
+            }
+
+
+            //return team deadlines
+            if (deadline.getTeamName() != null) {
+                Team team = getTeam(deadline.getTeamName());
+                String[] teamUsers = team.getTeamMemberTags();
+
+                for (String user : teamUsers) {
+
+                    //check if the user is present in the team
+                    if (user.equals(employee.getName())) {
+                        returnList.add(deadline);
+                    }
+                }
+            }
+        }
+
+        return returnList;
     }
 }

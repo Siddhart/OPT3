@@ -1,9 +1,21 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello World!");
 
-        Employee employee = new Employee("Siddhart", false);
+        Employee employee = new Employee("Dev1", false);
 
-        System.out.println("User Logged in as: " + employee.getName() + "\nManager: " + employee.isManager());
+        Menu menu = new Menu(employee);
+
+        Scanner s = new Scanner(System.in);
+        int input = 0;
+
+
+        while (true) {
+            menu.printMenu();
+            input = s.nextInt();
+
+            menu.chooseOption(input);
+        }
     }
 }
