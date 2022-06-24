@@ -7,6 +7,8 @@ public class TaskDeadline extends Deadline {
         this.username = username;
         this.teamName = teamName;
         this.deadline = deadline;
+
+        this.reminderDays = 3;
     }
 
     @Override

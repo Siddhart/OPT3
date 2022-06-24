@@ -7,6 +7,8 @@ public class FinalDeadline extends Deadline{
         this.username = username;
         this.teamName = teamName;
         this.deadline = deadline;
+
+        this.reminderDays = 7;
     }
 
     @Override

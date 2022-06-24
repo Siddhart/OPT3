@@ -43,34 +43,4 @@ public class Company {
 
         return null;
     }
-
-    public static ArrayList<Deadline> getUserDeadline(Employee employee) {
-        ArrayList<Deadline> returnList = new ArrayList<>();
-
-        //add individual deadlines
-        for (Deadline deadline : deadlines) {
-
-            //return individual deadlines
-            if (employee.getName().equals(deadline.getDeadlineUser())) {
-                returnList.add(deadline);
-            }
-
-
-            //return team deadlines
-            if (deadline.getTeamName() != null) {
-                Team team = getTeam(deadline.getTeamName());
-                String[] teamUsers = team.getTeamMemberTags();
-
-                for (String user : teamUsers) {
-
-                    //check if the user is present in the team
-                    if (user.equals(employee.getName())) {
-                        returnList.add(deadline);
-                    }
-                }
-            }
-        }
-
-        return returnList;
-    }
 }

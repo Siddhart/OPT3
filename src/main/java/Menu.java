@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Menu {
@@ -66,7 +67,19 @@ public class Menu {
         System.out.println(String.format("%d. Exit Application", count));
 
         System.out.println("=================");
-        System.out.println("\nPlease choose an option: ");
+        System.out.println("Please choose an option: ");
+    }
+
+    public static void editDeadlineMenu(ArrayList<Deadline> deadlines) {
+        System.out.println("=================");
+
+        int count = 1;
+        for (Deadline deadline : deadlines) {
+            System.out.println(String.format("%d. %d days - %s", count++, deadline.getDaysleft(), deadline.getName()));
+        }
+
+        System.out.println("=================");
+        System.out.println("\nEnter the number of the deadline you want to edit: ");
     }
 
     private int getUserOptionCount() {
@@ -82,7 +95,7 @@ public class Menu {
             System.exit(0);
         }
 
-        switch (input){
+        switch (input) {
             case 1:
                 optionShowDashboard();
                 break;
@@ -95,17 +108,17 @@ public class Menu {
         }
     }
 
-    private void optionShowDashboard(){
+    private void optionShowDashboard() {
         Dashboard dashboard = new Dashboard(this.employee);
         dashboard.showDashboard();
     }
 
-    private void optionEditDeadline(){
-
+    private void optionEditDeadline() {
+        Deadline.editDeadlinesProcess(employee);
     }
 
     //only for managers
-    private void optionAddDeadline(){
+    private void optionAddDeadline() {
 
     }
 }
