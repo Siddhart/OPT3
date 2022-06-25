@@ -5,7 +5,17 @@ import java.util.ArrayList;
 
 public class Notifyer {
 
-    public final String webhookURL = "https://discord.com/api/webhooks/988899255307628584/WldSWO_FFDeZ02MsO3mV_oKhmzd2YGTMVOU_AaCL6eVgjMzEtysWtbwF_KZPEiJMzM65";
+    public Notifyer(String employeeName) {
+        ArrayList<Deadline> employeeDeadlines = Deadline.getUserDeadline(employeeName);
+
+        for(Deadline deadline : employeeDeadlines){
+            //check if the amount of days before the reminder is equal to the amount of days left till the deadline
+            if(deadline.reminderDays == deadline.getDaysleft()){
+                Sender sender = new Sender();
+                sender.sendMessage(generateMessage(deadline, employeeName));
+            }
+        }
+    }
 
     private String getEmbedColor(Deadline d) {
         int days = d.getDaysleft();
@@ -36,42 +46,5 @@ public class Notifyer {
 
         //Discord embed format
         return String.format("{\"embeds\": [{\"title\":\"%s\", \"color\": \"%s\"}]}", title, getEmbedColor(d));
-    }
-
-    private void sendMessage(String employeeName, Deadline d){
-        try {
-            URL url = new URL(webhookURL);
-
-            HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
-
-            con.addRequestProperty("Content-Type", "application/json");
-            con.addRequestProperty("User-Agent", "Java-DiscordWebhook-BY-Siddhart");
-            con.setDoOutput(true);
-            con.setRequestMethod("POST");
-
-            OutputStream stream = con.getOutputStream();
-
-            //get generated message
-            stream.write(generateMessage(d, employeeName).getBytes());
-            stream.flush();
-            stream.close();
-
-            con.getInputStream().close();
-            con.disconnect();
-        } catch (Exception e) {
-            System.out.println(e);
-            e.printStackTrace();
-        }
-    }
-
-    public Notifyer(String employeeName) {
-        ArrayList<Deadline> employeeDeadlines = Deadline.getUserDeadline(employeeName);
-
-        for(Deadline deadline : employeeDeadlines){
-            //check if the amount of days before the reminder is equal to the amount of days left till the deadline
-            if(deadline.reminderDays == deadline.getDaysleft()){
-                sendMessage(employeeName, deadline);
-            }
-        }
     }
 }
