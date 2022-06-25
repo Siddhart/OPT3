@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Date;
@@ -6,7 +7,7 @@ public class DeadlineTest {
 
     @Test
     public void printDeadlineColors(){
-        Deadline taskDeadlineRed =new TaskDeadline("Get design approval","Siddhart", null,  new Date(new Date().getTime() + 86400000 * 2));
+        Deadline taskDeadlineRed =new TaskDeadline("Get design approval","Siddhart", null,  new Date(new Date().getTime() + 86400000 * 3));
         System.out.println(taskDeadlineRed.getDeadlineString());
 
         Deadline taskDeadlineYellow =new TaskDeadline("Convert Figma design to HTML and CSS","Siddhart", null,  new Date(new Date().getTime() + 86400000 * 7));
@@ -18,6 +19,7 @@ public class DeadlineTest {
         Deadline taskDeadlineDefault =new TaskDeadline("Get Client website approval", "Siddhart", null, new Date(new Date().getTime() + 86400000 * 30));
         System.out.println(taskDeadlineDefault.getDeadlineString());
 
-        new Notifyer("Siddhart", taskDeadlineGreen, taskDeadlineGreen.getType());
+        new Notifyer("Siddhart");
+        Assert.assertTrue(true);
     }
 }

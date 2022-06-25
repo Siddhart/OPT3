@@ -9,7 +9,7 @@ public class Dashboard {
     }
 
     public void showDashboard(){
-        ArrayList<Deadline> deadlines = Deadline.getUserDeadline(this.employee);
+        ArrayList<Deadline> deadlines = Deadline.getUserDeadline(this.employee.getName());
 
         Collections.sort(deadlines, Comparator.comparing(Deadline::getDaysleft));
 

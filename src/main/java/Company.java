@@ -22,13 +22,13 @@ public class Company {
     public static ArrayList<Deadline> deadlines = new ArrayList<>() {
         {
             //without team
-            add(new TaskDeadline("Get design approval", "Siddhart", null, new Date(1654543552000L)));
-            add(new TaskDeadline("Convert Figma design to HTML and CSS", "Siddhart", null, new Date(1656703552000L)));
+            add(new TaskDeadline("Get design approval", "Siddhart", null, new Date(new Date().getTime() + 86400000 * 3)));//add 3 days
+            add(new TaskDeadline("Convert Figma design to HTML and CSS", "Siddhart", null, new Date(new Date().getTime() + 86400000 * 7)));//add 7 days
             //with team
-            add(new TaskDeadline("Setup website hosting 1/2", null, "Development", new Date(1657481152000L)));
+            add(new TaskDeadline("Setup website hosting 1/2", "Siddhart", null, new Date(new Date().getTime() + 86400000 * 13)));//add 13 days
 
             //final deadline ONLY TEAM
-            add(new FinalDeadline("Setup website hosting 2/2", "Siddhart", null, new Date(1654543552000L)));
+            add(new FinalDeadline("Setup website hosting 2/2", null, "Development", new Date(new Date().getTime() + 86400000 * 7)));//add 7 days
         }
     };
 

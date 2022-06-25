@@ -54,14 +54,14 @@ public abstract class Deadline {
         return (int) (timeDiff / (1000 * 60 * 60 * 24));
     }
 
-    public static ArrayList<Deadline> getUserDeadline(Employee employee) {
+    public static ArrayList<Deadline> getUserDeadline(String employeeName) {
         ArrayList<Deadline> returnList = new ArrayList<>();
 
         //add individual deadlines
         for (Deadline deadline : Company.deadlines) {
 
             //return individual deadlines
-            if (employee.getName().equals(deadline.getDeadlineUser())) {
+            if (employeeName.equals(deadline.getDeadlineUser())) {
                 returnList.add(deadline);
             }
 
@@ -71,14 +71,14 @@ public abstract class Deadline {
                 Team team = Company.getTeam(deadline.getTeamName());
                 String[] teamUsers = team.getTeamMemberTags();
 
-                if (employee.getName().equals(team.getManagerTag())) {
+                if (employeeName.equals(team.getManagerTag())) {
                     returnList.add(deadline);
                 }
 
                 for (String user : teamUsers) {
 
                     //check if the user is present in the team
-                    if (user.equals(employee.getName())) {
+                    if (user.equals(employeeName)) {
                         returnList.add(deadline);
                     }
                 }
@@ -92,7 +92,7 @@ public abstract class Deadline {
         ArrayList<Deadline> editableDeadlines = new ArrayList<>();
 
         //get deadlines that the user can edit
-        for (Deadline deadline : getUserDeadline(employee)) {
+        for (Deadline deadline : getUserDeadline(employee.getName())) {
             //check if the user is the manager of the deadline
 
             //task deadline
