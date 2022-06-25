@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Employee {
     private Login login;
 
@@ -5,13 +7,14 @@ public class Employee {
     private boolean manager;
     private String teamName;
 
-    public Employee(String tag, boolean manager) {
+    public Employee(String tag, boolean manager, String teamName) {
 
         login = Login.getInstance();
 
         if (login.isAuthenticated()) {
             this.name = tag;
             this.manager = manager;
+            this.teamName = teamName;
         }
     }
 
@@ -21,5 +24,17 @@ public class Employee {
 
     public boolean isManager() {
         return manager;
+    }
+
+    public String getTeam() {
+        ArrayList<Team> teams = Company.getTeams();
+
+        for(Team team : teams){
+            if(this.name.equals(team.getManagerTag())){
+                return team.getTeamName();
+            }
+        }
+
+        return null;
     }
 }

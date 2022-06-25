@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        Employee employee = new Employee("DevAdmin", true);
+        Employee employee = new Employee("DevAdmin", true, "Development");
 
         Menu menu = new Menu(employee);
 

@@ -18,25 +18,11 @@ public class Menu {
         {
             add("Show Dashboard");
             add("Edit Deadline");
-        }
-    };
-
-    private ArrayList<String> managerMenuOptions = new ArrayList<>() {
-        {
             add("Add Deadline");
         }
     };
 
     public void printMenu() {
-        if (this.employee.isManager()) {
-            printManagerMenu();
-            return;
-        }
-
-        printUserMenu();
-    }
-
-    private void printUserMenu() {
         System.out.println("=================");
 
         int count = 1;
@@ -51,25 +37,6 @@ public class Menu {
         System.out.println("\nPlease choose an option: ");
     }
 
-    private void printManagerMenu() {
-        System.out.println("=================");
-
-        ArrayList<String> combinedOptions = new ArrayList<>();
-        combinedOptions.addAll(userMenuOptions);
-        combinedOptions.addAll(managerMenuOptions);
-
-        int count = 1;
-        for (String option : combinedOptions) {
-            System.out.println(String.format("%d. %s", count, option));
-            count++;
-        }
-
-        System.out.println(String.format("%d. Exit Application", count));
-
-        System.out.println("=================");
-        System.out.println("Please choose an option: ");
-    }
-
     public static void editDeadlineMenu(ArrayList<Deadline> deadlines) {
         System.out.println("=================");
 
@@ -82,13 +49,26 @@ public class Menu {
         System.out.println("\nEnter the number of the deadline you want to edit: ");
     }
 
-    private int getUserOptionCount() {
-        if (this.employee.isManager()) {
-            return userMenuOptions.size() + managerMenuOptions.size();
+    public static void getAddDeadlineOptions(Employee employee) {
+
+        ArrayList<String> options = new ArrayList<>();
+
+        options.add("Task Deadline");
+
+        if (employee.isManager()) {
+            options.add("Final Deadline");
         }
 
+        int count = 1;
+        for(String option : options) {
+            System.out.println(count++ + ". " + option);
+        }
+    }
+
+    private int getUserOptionCount() {
         return userMenuOptions.size();
     }
+
 
     public void chooseOption(int input) {
         if (input > getUserOptionCount()) {
@@ -119,6 +99,6 @@ public class Menu {
 
     //only for managers
     private void optionAddDeadline() {
-
+        Deadline.addDeadlineProcess(employee);
     }
 }

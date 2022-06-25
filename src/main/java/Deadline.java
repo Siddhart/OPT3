@@ -71,7 +71,7 @@ public abstract class Deadline {
                 Team team = Company.getTeam(deadline.getTeamName());
                 String[] teamUsers = team.getTeamMemberTags();
 
-                if(employee.getName().equals(team.getManagerTag())){
+                if (employee.getName().equals(team.getManagerTag())) {
                     returnList.add(deadline);
                 }
 
@@ -154,6 +154,47 @@ public abstract class Deadline {
         String reminderInput = scanner.nextLine();
         if (!reminderInput.equals("")) {
             deadline.reminderDays = Integer.parseInt(reminderInput);
+        }
+    }
+
+    public static void addDeadlineProcess(Employee employee) {
+        Menu.getAddDeadlineOptions(employee);
+
+        Scanner scanner = new Scanner(System.in);
+
+        int chosenOption = scanner.nextInt();
+        scanner.nextLine();
+
+        String[] types = {"TASKDEADLINE", "FINALDEADLINE"};
+
+        //task deadline
+        addDeadline(employee, types[chosenOption - 1]);
+    }
+
+    private static void addDeadline(Employee employee, String type) {
+        //ask for name, date and assign deadline to user (no team)
+
+        Scanner scanner = new Scanner(System.in);
+
+        //ask for the name
+        System.out.println("Enter the name for this deadline: ");
+        String deadlineNameInput = scanner.nextLine();
+
+        //ask for the dealdine date
+        System.out.println("Enter a date (dd-mm-yyyy): ");
+        String dateInput = scanner.nextLine();
+        Date deadlineDate = new Date();
+
+        try {
+            deadlineDate = new SimpleDateFormat("dd-MM-yyyy").parse(dateInput);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        if (type.equals("TASKDEADLINE")) {
+            Company.addDeadline(new TaskDeadline(deadlineNameInput, employee.getName(), null, deadlineDate));
+        }else{
+            Company.addDeadline(new FinalDeadline(deadlineNameInput, null, employee.getTeam(), deadlineDate));
         }
     }
 }

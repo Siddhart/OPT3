@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -17,6 +18,7 @@ public class Company {
         }
     };
 
+
     public static ArrayList<Deadline> deadlines = new ArrayList<>() {
         {
             //without team
@@ -30,8 +32,16 @@ public class Company {
         }
     };
 
+    public static void addDeadline(Deadline d) {
+        deadlines.add(d);
+    }
+
     public static ArrayList<User> getUsers() {
         return users;
+    }
+
+    public static ArrayList<Team> getTeams() {
+        return teams;
     }
 
     public static Team getTeam(String teamName) {
