@@ -5,12 +5,10 @@ public class Main {
 
         Employee employee = new Employee("Siddhart", false, "Development");
 
-        Notifyer notifyer = new Notifyer(employee.getName());
         Menu menu = new Menu(employee);
 
         Scanner s = new Scanner(System.in);
-        int input = 0;
-
+        int input;
 
         while (true) {
             menu.printMenu();
