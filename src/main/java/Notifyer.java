@@ -10,8 +10,8 @@ public class Notifyer {
 
         for(Deadline deadline : employeeDeadlines){
             //check if the amount of days before the reminder is equal to the amount of days left till the deadline
+            Sender sender = new Sender();
             if(deadline.reminderDays == deadline.getDaysleft()){
-                Sender sender = new Sender();
                 sender.sendMessage(generateMessage(deadline, employeeName));
             }
         }
