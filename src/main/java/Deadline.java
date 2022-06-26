@@ -43,6 +43,14 @@ public abstract class Deadline {
 
     public abstract String getType();
 
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
+    }
+
+    public void setHasToRemind(boolean hasToRemind) {
+        this.hasToRemind = hasToRemind;
+    }
+
     //methodes
     public String getAssigned() {
         return this.username != null ? this.username : this.teamName;
@@ -98,7 +106,7 @@ public abstract class Deadline {
         return returnList;
     }
 
-    private static ArrayList<Deadline> getEditableDeadlines(Employee employee){
+    private static ArrayList<Deadline> getEditableDeadlines(Employee employee) {
         ArrayList<Deadline> editableDeadlines = new ArrayList<>();
         for (Deadline deadline : getUserDeadline(employee.getName())) {
             //check if the user is the manager of the deadline
@@ -207,9 +215,16 @@ public abstract class Deadline {
         }
 
         if (type.equals("TASKDEADLINE")) {
-            Company.addDeadline(new TaskDeadline(deadlineNameInput, employee.getName(), null, deadlineDate, true));
+            Deadline newDeadline = new TaskDeadline(deadlineNameInput, employee.getName(), null);
+            newDeadline.setDeadline(deadlineDate);
+            newDeadline.setHasToRemind(true);
+
+            Company.addDeadline(newDeadline);
         } else {
-            Company.addDeadline(new FinalDeadline(deadlineNameInput, null, employee.getTeam(), deadlineDate, true));
+            Deadline newDeadline = new FinalDeadline(deadlineNameInput, null, employee.getTeam());
+            newDeadline.setDeadline(deadlineDate);
+            newDeadline.setHasToRemind(true);
+            Company.addDeadline(newDeadline);
         }
     }
 }
