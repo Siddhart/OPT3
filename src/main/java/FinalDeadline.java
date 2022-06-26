@@ -2,11 +2,12 @@ import java.util.Date;
 
 public class FinalDeadline extends Deadline{
 
-    public FinalDeadline(String name, String username, String teamName, Date deadline){
+    public FinalDeadline(String name, String username, String teamName, Date deadline, boolean hasToRemind){
         this.name = name;
         this.username = username;
         this.teamName = teamName;
         this.deadline = deadline;
+        this.hasToRemind = hasToRemind;
 
         this.reminderDays = 7;
     }

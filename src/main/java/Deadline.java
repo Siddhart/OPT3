@@ -14,6 +14,8 @@ public abstract class Deadline {
     protected String teamName;
     protected Date deadline;
 
+    protected boolean hasToRemind;
+
     protected int reminderDays;
 
     //Getters
@@ -23,6 +25,14 @@ public abstract class Deadline {
 
     public String getTeamName() {
         return this.teamName;
+    }
+
+    public boolean getReminder(){
+        return this.hasToRemind;
+    }
+
+    public void remind(){
+        this.hasToRemind = false;
     }
 
     public String getName() {
@@ -192,9 +202,9 @@ public abstract class Deadline {
         }
 
         if (type.equals("TASKDEADLINE")) {
-            Company.addDeadline(new TaskDeadline(deadlineNameInput, employee.getName(), null, deadlineDate));
+            Company.addDeadline(new TaskDeadline(deadlineNameInput, employee.getName(), null, deadlineDate, true));
         }else{
-            Company.addDeadline(new FinalDeadline(deadlineNameInput, null, employee.getTeam(), deadlineDate));
+            Company.addDeadline(new FinalDeadline(deadlineNameInput, null, employee.getTeam(), deadlineDate, true));
         }
     }
 }

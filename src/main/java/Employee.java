@@ -7,7 +7,7 @@ public class Employee {
     private boolean manager;
     private String teamName;
 
-    Notifyer notifyer;
+    DeadlineNotifyer deadlineNotifyer;
 
     public Employee(String tag, boolean manager, String teamName) {
 
@@ -17,7 +17,7 @@ public class Employee {
             this.name = tag;
             this.manager = manager;
             this.teamName = teamName;
-            this.notifyer = new Notifyer(this.name);
+            this.deadlineNotifyer = new DeadlineNotifyer(this.name);
         }
     }
 
