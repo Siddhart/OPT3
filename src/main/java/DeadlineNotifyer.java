@@ -76,14 +76,22 @@ public class DeadlineNotifyer {
 
     private String generateMessage(Deadline d, String tagName) {
 
-        boolean isTask = !d.getDeadlineUser().equals("");
-        boolean isFinal = !d.getTeamName().equals("");
+        boolean isTask = false;
+        boolean isFinal = false;
+
+        if (d.getDeadlineUser() != null) {
+            isTask = !d.getDeadlineUser().equals("");
+        }
+
+        if (d.getTeamName() != null) {
+            isFinal = !d.getTeamName().equals("");
+        }
 
         String title = "";
         if (checkImportant(d.getDaysleft(), isTask, isFinal, d.getReminder())) {
             //bold message
-             title = String.format("**%s** - You have **%d** day(s) left to **%s**", tagName, d.getDaysleft(), d.getName());
-        }else{
+            title = String.format("**%s** - You have **%d** day(s) left to **%s**", tagName, d.getDaysleft(), d.getName());
+        } else {
             //normal message
             title = String.format("%s - You have %d day(s) left to %s", tagName, d.getDaysleft(), d.getName());
 

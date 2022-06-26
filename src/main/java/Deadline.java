@@ -27,11 +27,11 @@ public abstract class Deadline {
         return this.teamName;
     }
 
-    public boolean getReminder(){
+    public boolean getReminder() {
         return this.hasToRemind;
     }
 
-    public void remind(){
+    public void remind() {
         this.hasToRemind = false;
     }
 
@@ -98,10 +98,8 @@ public abstract class Deadline {
         return returnList;
     }
 
-    public static void editDeadlinesProcess(Employee employee) {
+    private static ArrayList<Deadline> getEditableDeadlines(Employee employee){
         ArrayList<Deadline> editableDeadlines = new ArrayList<>();
-
-        //get deadlines that the user can edit
         for (Deadline deadline : getUserDeadline(employee.getName())) {
             //check if the user is the manager of the deadline
 
@@ -118,6 +116,13 @@ public abstract class Deadline {
                 }
             }
         }
+
+        return editableDeadlines;
+    }
+
+    public static void editDeadlinesProcess(Employee employee) {
+        //get all editable deadlines
+        ArrayList<Deadline> editableDeadlines = getEditableDeadlines(employee);
 
         Menu.editDeadlineMenu(editableDeadlines);
 
@@ -203,7 +208,7 @@ public abstract class Deadline {
 
         if (type.equals("TASKDEADLINE")) {
             Company.addDeadline(new TaskDeadline(deadlineNameInput, employee.getName(), null, deadlineDate, true));
-        }else{
+        } else {
             Company.addDeadline(new FinalDeadline(deadlineNameInput, null, employee.getTeam(), deadlineDate, true));
         }
     }
